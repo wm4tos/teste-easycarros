@@ -22,9 +22,11 @@ app.use(bodyParser.json());
 
 app.use(routes(Router()));
 
-app.use((_, res) => res.status(errorHelper('NOT_FOUND').status).json(errorHelper('NOT_FOUND')));
+app.use((err, req, res, next) => {
+  errorHandler(err, req, res, next);
+});
 
-app.use(errorHandler);
+app.use((_, res) => res.status(errorHelper('NOT_FOUND').status).json(errorHelper('NOT_FOUND')));
 
 const listen = () => app.listen(PORT, () => process.stdout.write(`Listening on port ${PORT}\n`));
 
