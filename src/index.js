@@ -5,6 +5,8 @@ const cors = require('cors');
 const routes = require('./routes');
 const { PORT } = require('./config');
 const mongo = require('./mongo');
+const errorHandler = require('./middlewares/error_handler');
+const errorHelper = require('./helpers/error');
 
 const { Router } = express;
 const app = express();
@@ -19,6 +21,10 @@ app.use(cors({
 app.use(bodyParser.json());
 
 app.use(routes(Router()));
+
+app.use((_, res) => res.status(errorHelper('NOT_FOUND').status).json(errorHelper('NOT_FOUND')));
+
+app.use(errorHandler);
 
 const listen = () => app.listen(PORT, () => process.stdout.write(`Listening on port ${PORT}\n`));
 
