@@ -1,12 +1,12 @@
 const httpStatus = require('http-status-codes');
-const error = require('../helpers/error');
+const errorHelper = require('../helpers/error');
 
 module.exports = (err, req, res) => {
-  if (err.message in httpStatus) {
-    return res.status(httpStatus[err.message]).json(error[err.message]);
+  if (err.name in httpStatus) {
+    return res.status(httpStatus[err.name]).json(errorHelper(err.name, err.message));
   }
 
-  const internalError = error();
+  const internalError = errorHelper();
 
   return res.status(internalError.status).json(internalError);
 };
