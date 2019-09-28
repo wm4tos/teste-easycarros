@@ -9,3 +9,13 @@ module.exports.findByService = async (service) => {
     throw error;
   }
 };
+
+module.exports.findAll = async () => {
+  try {
+    const partners = await Partner.find();
+
+    return partners;
+  } catch (error) {
+    throw error;
+  }
+};
