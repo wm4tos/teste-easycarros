@@ -2,7 +2,12 @@ const { sign } = require('../../helpers/jwt');
 const { findByEmail } = require('./repository');
 const { passwordsAreEquals } = require('./helper');
 
-module.exports.signIn = async ({ email, password }) => {
+/**
+ * @description Search user, compare passwords and return user with token.
+ * @param {Object} data Object with email and password.
+ * @returns {Object}
+ */
+const signIn = async ({ email, password }) => {
   try {
     const error = { name: 'UNAUTHORIZED' };
     const user = await findByEmail(email);
@@ -22,4 +27,8 @@ module.exports.signIn = async ({ email, password }) => {
   } catch (error) {
     throw error;
   }
+};
+
+module.exports = {
+  signIn,
 };

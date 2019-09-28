@@ -9,7 +9,7 @@ module.exports.onePartner = async (service, coords) => {
 
     const partner = partnersWithDistance.find(({ distance }) => distance <= 10);
 
-    delete partner.distance;
+    if (partner) delete partner.distance;
     return partner;
   } catch (error) {
     throw error;

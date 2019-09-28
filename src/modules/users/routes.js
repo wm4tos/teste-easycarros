@@ -6,16 +6,7 @@ const validator = require('../../middlewares/validator');
 module.exports = () => {
   const router = Router();
 
-  router.post('/auth', validator(contracts.auth, 'body'), async (req, res, next) => {
-    try {
-      const { body } = req;
-      const data = await auth(body);
-
-      res.status(200).json(data);
-    } catch (error) {
-      next(error);
-    }
-  });
+  router.post('/auth', validator(contracts.auth, 'body'), auth);
 
   return { router, endpoint: '/user' };
 };
