@@ -1,4 +1,4 @@
-const User = require('./model.js');
+const User = require('./model');
 const { transformInJSON } = require('../../helpers/mongoose');
 
 module.exports.findByEmail = async (email) => {
