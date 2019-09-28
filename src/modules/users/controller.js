@@ -1,11 +1,6 @@
 const { signIn } = require('./service');
 
-/**
- * Function to authenticate in app.
- * @param {Object} data Email and password.
- * @returns {Object}
- */
-const auth = async (req, res, next) => {
+module.exports.auth = async (req, res, next) => {
   try {
     const { body } = req;
     const data = await signIn(body);
@@ -14,8 +9,4 @@ const auth = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-
-module.exports = {
-  auth,
 };
