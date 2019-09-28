@@ -1,5 +1,5 @@
-const { sign } = require('../../../helpers/jwt');
-const Users = require('../models');
+const { sign } = require('../../helpers/jwt.js');
+const Users = require('./model');
 
 module.exports.signIn = async ({ email, password }) => {
   const query = { email: { $regex: new RegExp(`^${email}$`, 'i') } };

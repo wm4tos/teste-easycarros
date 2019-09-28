@@ -5,7 +5,7 @@ module.exports = (modules = []) => {
   const routes = [];
 
   modules.forEach(m => (fs.existsSync(`src/modules/${m}/`)
-    ? routes.push(require(`../modules/${m}/routes/index.js`))
+    ? routes.push(require(`../modules/${m}/routes.js`))
     : null));
 
   return routes;

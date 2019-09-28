@@ -22,9 +22,7 @@ app.use(bodyParser.json());
 
 app.use(routes(Router()));
 
-app.use((err, req, res, next) => {
-  errorHandler(err, req, res, next);
-});
+app.use((err, req, res, next) => errorHandler(err, req, res, next));
 
 app.use((_, res) => res.status(errorHelper('NOT_FOUND').status).json(errorHelper('NOT_FOUND')));
 
