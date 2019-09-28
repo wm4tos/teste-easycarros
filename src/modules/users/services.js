@@ -10,7 +10,7 @@ module.exports.signIn = async ({ email, password }) => {
     if (!user) {
       error.message = 'Invalid e-mail';
       throw error;
-    } else if (comparePassword(user, { password })) {
+    } else if (!comparePassword(user, { password })) {
       error.message = 'Invalid password';
       throw error;
     }
