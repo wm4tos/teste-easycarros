@@ -11,5 +11,5 @@ module.exports = ({ lat: lat1, long: lon1 }, { lat: lat2, long: lon2 }) => {
   dist = dist * 180 / Math.PI;
   dist = dist * 60 * 1.1515 * 1.609344;
 
-  return parseInt(dist, 10);
+  return parseFloat(dist.toFixed(2));
 };
