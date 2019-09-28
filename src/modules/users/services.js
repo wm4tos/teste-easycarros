@@ -1,11 +1,10 @@
 const { sign } = require('../../helpers/jwt.js');
-const Users = require('./model');
+const { findByEmail } = require('./repository');
 
 module.exports.signIn = async ({ email, password }) => {
-  const query = { email: { $regex: new RegExp(`^${email}$`, 'i') } };
   try {
     const error = { name: 'UNAUTHORIZED' };
-    const user = await Users.findOne(query);
+    const user = await findByEmail(email);
 
     if (!user) {
       error.message = 'Invalid e-mail';
@@ -16,7 +15,7 @@ module.exports.signIn = async ({ email, password }) => {
     }
 
     delete user.password;
-    user.token = sign(user);
+    user.token = await sign(user);
 
     return user;
   } catch (error) {
