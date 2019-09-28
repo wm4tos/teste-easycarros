@@ -1,5 +1,5 @@
 const { withDistance } = require('./mapper');
-const { findByService } = require('./repository');
+const { findByService, findAll } = require('./repository');
 
 module.exports.onePartner = async (service, coords) => {
   try {
@@ -9,15 +9,6 @@ module.exports.onePartner = async (service, coords) => {
 
     const partner = partnersWithDistance.find(({ distance }) => distance <= 10);
 
-    if (!partner) {
-      const error = {
-        name: 'NOT_FOUND',
-        message: 'Partner with this service not found within 10 kilometers',
-      };
-
-      throw error;
-    }
-
     delete partner.distance;
     return partner;
   } catch (error) {
@@ -25,22 +16,13 @@ module.exports.onePartner = async (service, coords) => {
   }
 };
 
-module.exports.allPartners = async (service, coords) => {
+module.exports.allPartners = async (coords) => {
   try {
-    const partners = await findByService(service);
+    const partners = await findAll();
 
     const partnersWithDistance = partners.map(withDistance(coords));
 
     const partnersAround = partnersWithDistance.filter(({ distance }) => distance <= 10);
-
-    if (!partnersAround.length) {
-      const error = {
-        name: 'NOT_FOUND',
-        message: 'Partner with this service not found within 10 kilometers',
-      };
-
-      throw error;
-    }
 
     return partnersAround;
   } catch (error) {
