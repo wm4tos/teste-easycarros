@@ -1,7 +1,12 @@
+const { Router } = require('express');
 const { auth } = require('./controller');
+const contracts = require('./contract');
+const validator = require('../../middlewares/validator');
 
-module.exports = (router) => {
-  router.post('/login', auth);
+module.exports = () => {
+  const router = Router();
 
-  return router;
+  router.post('/auth', validator(contracts.auth, 'body'), auth);
+
+  return { router, endpoint: '/user' };
 };

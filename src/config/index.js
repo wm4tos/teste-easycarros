@@ -7,4 +7,5 @@ module.exports = Object.freeze({
   MONGODB_URI: process.env.MONGODB_URI,
   MONGODB_DATABASE: process.env.MONGODB_DATABASE,
   TOKEN_EXPIRES_IN: process.env.TOKEN_EXPIRES_IN,
+  GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
 });

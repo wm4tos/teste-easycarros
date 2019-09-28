@@ -6,6 +6,8 @@ module.exports = (err, req, res) => {
     return res.status(httpStatus[err.name]).json(errorHelper(err.name, err.message));
   }
 
+  console.error(err);
+
   const internalError = errorHelper();
 
   return res.status(internalError.status).json(internalError);
