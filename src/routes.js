@@ -1,4 +1,4 @@
-const loadRoutes = require('../helpers/load_routes');
+const loadRoutes = require('./helpers/load_routes');
 
 module.exports = (router) => {
   const routes = loadRoutes(['users']);
