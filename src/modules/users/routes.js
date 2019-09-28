@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { auth } = require('./controller');
-const contracts = require('./contracts');
+const contracts = require('./contract');
 const validator = require('../../middlewares/validator');
 
 module.exports = () => {
