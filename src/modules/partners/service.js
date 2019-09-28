@@ -1,7 +1,13 @@
 const { withDistance } = require('./mapper');
 const { findByService, findAll } = require('./repository');
 
-module.exports.onePartner = async (service, coords) => {
+/**
+ * @description Find a partner with a service in 10kms.
+ * @param {String} service String with the name of service searched.
+ * @param {Object} coords Object who contains latitude and longitude of address.
+ * @returns {Partner}
+ */
+const onePartner = async (service, coords) => {
   try {
     const partners = await findByService(service);
 
@@ -16,7 +22,12 @@ module.exports.onePartner = async (service, coords) => {
   }
 };
 
-module.exports.allPartners = async (coords) => {
+/**
+ * @description Find any partner in 10kms.
+ * @param {Object} coords Object with latitude and longitude props.
+ * @returns {Array}
+ */
+const allPartners = async (coords) => {
   try {
     const partners = await findAll();
 
@@ -28,4 +39,9 @@ module.exports.allPartners = async (coords) => {
   } catch (error) {
     throw error;
   }
+};
+
+module.exports = {
+  onePartner,
+  allPartners,
 };
