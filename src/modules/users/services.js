@@ -16,7 +16,7 @@ module.exports.signIn = async ({ email, password }) => {
     }
 
     delete user.password;
-    user.token = await sign(user);
+    user.token = sign(user);
 
     return user;
   } catch (error) {
