@@ -1,4 +1,5 @@
 const axiosGoogleApi = require('../helpers/axios')('https://maps.googleapis.com/maps/api');
+const normalizeString = require('../helpers/normalize-string');
 const { GOOGLE_MAPS_API_KEY } = require('../config');
 
 module.exports.getCoordsFromAddress = async (address) => {
@@ -12,7 +13,7 @@ module.exports.getCoordsFromAddress = async (address) => {
   }
 
   try {
-    const { data } = await axiosGoogleApi.get(`/geocode/json?address=${address}&key=${GOOGLE_MAPS_API_KEY}`);
+    const { data } = await axiosGoogleApi.get(`/geocode/json?address=${normalizeString(address)}&key=${GOOGLE_MAPS_API_KEY}`);
 
     if (data.error_message) {
       const error = {
@@ -26,9 +27,11 @@ module.exports.getCoordsFromAddress = async (address) => {
 
     const [result] = results;
 
-    const { location } = result.geometry;
+    const { location: { lat, lng } } = result.geometry;
 
-    return location;
+    const formatedLocation = { lat, long: lng };
+
+    return formatedLocation;
   } catch (error) {
     throw error;
   }
