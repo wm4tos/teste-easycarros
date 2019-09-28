@@ -8,7 +8,7 @@ module.exports = (schema, prop) => (req, res, next) => {
   const { details } = validationError;
 
   const error = {
-    name: 'UNAUTHORIZED',
+    name: 'BAD_REQUEST',
     message: details.reduce((acc, cur) => `${acc}, ${cur.message}`, ''),
   };
 
