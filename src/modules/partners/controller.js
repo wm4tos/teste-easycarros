@@ -5,32 +5,28 @@ module.exports.requirePartner = async ({ service, coords }) => {
   try {
     const partner = await onePartner(service, coords);
 
+    if (!partner) {
+      const error = {
+        name: 'NOT_FOUND',
+        message: 'Partner with this service not found within 10 kilometers',
+      };
+
+      throw error;
+    }
+
     return partner;
   } catch (error) {
     throw error;
   }
 };
 
-module.exports.allPartners = async ({
-  service, address, lat, long,
-}) => {
+module.exports.allPartners = async ({ address }) => {
   try {
-    let obj = {
-      lat, long,
-    };
+    const coords = await getCoordsFromAddress(address);
 
-    if (address) {
-      const { lat: latitude, lng } = await getCoordsFromAddress(address);
+    const partners = await allPartners(coords);
 
-      obj = {
-        lat: latitude,
-        long: lng,
-      };
-    }
-
-    const partner = await allPartners(service, obj);
-
-    return partner;
+    return partners;
   } catch (error) {
     throw error;
   }
