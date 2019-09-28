@@ -1,4 +1,4 @@
-const { signIn } = require('./services');
+const { signIn } = require('./service');
 
 module.exports.auth = async (data) => {
   try {
