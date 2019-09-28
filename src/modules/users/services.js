@@ -1,6 +1,6 @@
 const { sign } = require('../../helpers/jwt');
 const { findByEmail } = require('./repository');
-const { comparePassword } = require('./helper');
+const { passwordsAreEquals } = require('./helper');
 
 module.exports.signIn = async ({ email, password }) => {
   try {
@@ -10,7 +10,7 @@ module.exports.signIn = async ({ email, password }) => {
     if (!user) {
       error.message = 'Invalid e-mail';
       throw error;
-    } else if (!comparePassword(user, { password })) {
+    } else if (!passwordsAreEquals(user, { password })) {
       error.message = 'Invalid password';
       throw error;
     }
