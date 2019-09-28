@@ -5,4 +5,8 @@ module.exports.sign = data => sign(data, SECRET, {
   expiresIn: TOKEN_EXPIRES_IN || 3600,
 });
 
-module.exports.decode = token => decode(token);
+module.exports.decode = token => new Promise((resolve, reject) => {
+  const data = decode(token);
+
+  return data ? resolve(data) : reject(new Error('Invalid token'));
+});
