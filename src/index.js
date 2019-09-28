@@ -7,6 +7,7 @@ const { PORT } = require('./config');
 const mongo = require('./mongo');
 const errorHandler = require('./middlewares/error_handler');
 const errorHelper = require('./helpers/error');
+const seederHelper = require('./helpers/seed');
 
 const { Router } = express;
 const app = express();
@@ -28,9 +29,15 @@ app.use((_, res) => res.status(errorHelper('NOT_FOUND').status).json(errorHelper
 
 const listen = () => app.listen(PORT, () => process.stdout.write(`Listening on port ${PORT}\n`));
 
+const startServer = async () => {
+  await seederHelper();
+  listen();
+};
+
+
 mongooseConnection
   .on('error', console.error)
   .on('disconnected', mongo)
-  .once('open', listen);
+  .once('open', startServer);
 
 module.exports = app;
