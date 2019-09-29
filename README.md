@@ -20,6 +20,7 @@
     - `MONGODB_URI`: URI do mongo (URI deve ser igual ao nome do container, no caso `easy_carros_db`)
     - `MONGODB_DATABASE`: Nome do banco utilizado pela aplicação.
     - `NODE_ENV`: Ambiente da aplicação.
+    - `SECRET`: Chave utilizada pelo JWT.
     - `GOOGLE_MAPS_API_KEY`: Key da sua API do Google Maps.
 2. Executar a aplicação
     > docker-compose up
