@@ -14,6 +14,7 @@
     NODE_ENV=development
     SECRET=3OI15HT3QUODBHYI3g1iugYIEG31BIRUFBEHIUFHFE
     GOOGLE_MAPS_API_KEY={YOUR_API_KEY}
+    TOKEN_EXPIRES_IN=3600
     ```
 
     - `PORT`: Porta do servidor
@@ -22,6 +23,7 @@
     - `NODE_ENV`: Ambiente da aplicação.
     - `SECRET`: Chave utilizada pelo JWT.
     - `GOOGLE_MAPS_API_KEY`: Key da sua API do Google Maps.
+    - `TOKEN_EXPIRES_IN`: Tempo passado para o JWT para expirar o token de autenticação.
 2. Executar a aplicação
     > docker-compose up
 
