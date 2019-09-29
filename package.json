@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --timeout 3000 --require --require ./test/it-helper",
     "dev": "nodemon src/index.js"
   },
   "author": "Wesley Matos",
