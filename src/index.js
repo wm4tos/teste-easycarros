@@ -21,7 +21,7 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-app.use(routes(Router()));
+app.use('/api', routes(Router()));
 
 app.use((err, req, res, next) => errorHandler(err, req, res, next));
 
